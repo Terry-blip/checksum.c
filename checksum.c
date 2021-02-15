@@ -19,27 +19,21 @@ int main (int argc, char * argv[], char ** envp) {
 
   int count = 10;
   int sum = 0;   
-  int checksum = 0;
-  int complement = 0;
-  //int stdin;
+  char checksum;
+  char complement;
+  char header[10];
 
-  /* the following is the prototype for the read system call */
-  //int read(int fildes, void *buf, size_t nbyte);
-
-
+  read(0, header, 10);
 
   for (int i = 0; i < count; i++) {
 
-    //stdin = getchar;
-    //int nextChar = stdin;
-
-    int read(int fildes, void *buf, size_t nbyte);
+    header[i] = (int) getchar();
 
         if (i == 5) {
-            checksum = read;
+            checksum = header[i];
         }
         else {
-        sum = sum + read;
+            sum = sum + header[i];
         }
   }
 
