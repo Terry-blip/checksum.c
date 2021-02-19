@@ -21,29 +21,44 @@ int main (int argc, char * argv[], char ** envp) {
   int sum = 0;   
   unsigned char checksum;
   unsigned char complement;
-  char header[10];
-  int quotient = 0;
-  int remainder = 0;
+  char header[count];
 
-  read(0, header, 10);
+  read(0, header, count);
 
   for (int i = 0; i < count; i++) {
 
     	unsigned char temp = (unsigned char) header[i];
 
+		int carries = 0;
+
         if (i == 5) {
             checksum = temp;
+            temp = 0;
         }
+
+
+        if (sum >= max_int + 1) {
+
+        	carries = 1;
+    		sum = sum + temp;
+			sum = sum - max_int;
+			
+        }
+
         else {
-            sum = sum + temp;
+
+    		sum = sum + temp + carries;
+
         }
+
     }
 
-  quotient = sum / (max_int + 1);
-  remainder = sum % (max_int + 1);
+ 
+  int quotient = sum / (max_int + 1);
+  int remainder = sum % (max_int + 1);
   sum = quotient + remainder;
   complement = max_int - sum;
-
+  
  fprintf(stdout, "Stored Checksum: %d, Computed Checksum: %d\n", checksum, complement);
 
   if (checksum != complement ) {
